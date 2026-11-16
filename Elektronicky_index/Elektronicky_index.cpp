@@ -33,6 +33,35 @@ int main()
 		return 1;
 	}
 
+	int akce;
+	printf("\nVyberte akci:\n");
+	printf("1 - Pridat studenta\n");
+	printf("2 - Smazat studenta\n");
+	printf("3 - Upravit body studenta\n");
+	printf("Vase volba: ");
+	if (scanf("%d", &akce) != 1) {
+		printf("Neplatna volba.\n");
+		fclose(f);
+		return 1;
+	}
+
+	switch (akce) {
+	case 1:
+		printf("Pridani studenta zatim neni implementovano.\n");
+		fclose(f);
+		return 0;
+	case 2:
+		printf("Mazani studenta zatim neni implementovano.\n");
+		fclose(f);
+		return 0;
+	case 3:
+		break;
+	default:
+		printf("Neplatna volba.\n");
+		fclose(f);
+		return 1;
+	}
+
 	string pole[10];
 	int i = 0;
 
