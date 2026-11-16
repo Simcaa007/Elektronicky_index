@@ -1,4 +1,4 @@
-﻿# CMakeList.txt: Projekt CMake pro Elektronicky_index, sem přidejte logiku zdrojového
+# CMakeList.txt: Projekt CMake pro Elektronicky_index, sem přidejte logiku zdrojového
 # kódu a definic specifickou pro projekt.
 #
 
