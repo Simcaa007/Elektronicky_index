@@ -101,10 +101,71 @@ int main()
 		printf("Student byl uspesne pridan s ID %d.\n", nejvyssiID + 1);
 		return 0;
 	}
-	case 2:
-		printf("Mazani studenta zatim neni implementovano.\n");
+	case 2: {
+		string pole[10];
+		int i = 0;
+
+		printf("ID|JMENO|CVICENI|TESTY|ZKOUSKA|ZNAMKA\n");
+		while (fgets(radek, sizeof(radek), f) != NULL) {
+			if (i >= 10) {
+				printf("Chyba: Soubor obsahuje vice nez 10 studentu.\n");
+				fclose(f);
+				return 1;
+			}
+			pole[i] = radek;
+			printf("%s", radek);
+			i++;
+		}
 		fclose(f);
+
+		int studentID;
+		printf("Zadejte ID studenta ke smazani: ");
+		if (scanf("%d", &studentID) != 1) {
+			printf("Neplatne ID.\n");
+			return 1;
+		}
+
+		int pozice = -1;
+		for (int j = 0; j < i; j++) {
+			stringstream ss(pole[j]);
+			string id;
+			getline(ss, id, '|');
+
+			if (id == to_string(studentID)) {
+				pozice = j;
+				break;
+			}
+		}
+
+		if (pozice == -1) {
+			printf("Student s timto ID nebyl nalezen.\n");
+			return 1;
+		}
+
+		switch (kurz) {
+		case 1:
+			f = fopen("C:\\Users\\Pepa\\Documents\\PC1T\\Elektronicky_index\\Elektronicky_index\\data\\kom.txt", "w");
+			break;
+		case 2:
+			f = fopen("C:\\Users\\Pepa\\Documents\\PC1T\\Elektronicky_index\\Elektronicky_index\\data\\zkr.txt", "w");
+			break;
+		}
+
+		if (f == NULL) {
+			perror("Chyba pri otevirani souboru pro zapis");
+			return 1;
+		}
+
+		for (int j = 0; j < i; j++) {
+			if (j != pozice) {
+				fprintf(f, "%s", pole[j].c_str());
+			}
+		}
+
+		fclose(f);
+		printf("Student byl smazan.\n");
 		return 0;
+	}
 	default:
 		printf("Neplatna volba.\n");
 		fclose(f);
@@ -117,6 +178,11 @@ int main()
 		printf("ID|JMENO|CVICENI|TESTY|ZKOUSKA|ZNAMKA\n");
 		while (fgets(radek, sizeof(radek), f) != NULL)	//fgets cte dokud nenarazi na konec radku \n
 		{
+			if (i >= 10) {
+				printf("Chyba: Soubor obsahuje vice nez 10 studentu.\n");
+				fclose(f);
+				return 1;
+			}
 			printf("%s", radek);
 			pole[i] = radek;
 			i++;
@@ -132,12 +198,24 @@ int main()
 		printf("A nyni zadejte pocet bodu, kolik chcete pridat: ");
 		scanf("%d", &body);
 
-		if (studentID < 0 || studentID >= i) {
+		int pozice = -1;
+		for (int j = 0; j < i; j++) {
+			stringstream hledani(pole[j]);
+			string idRadku;
+			getline(hledani, idRadku, '|');
+
+			if (idRadku == to_string(studentID)) {
+				pozice = j;
+				break;
+			}
+		}
+
+		if (pozice == -1) {
 			printf("Chyba: Zadane ID studenta neexistuje!\n");
 			return 1;
 		}
 
-		stringstream ss(pole[studentID]);
+		stringstream ss(pole[pozice]);
 
 		string id, jmeno, cviceniStr, testStr, zkouskaStr;
 
@@ -186,7 +264,7 @@ int main()
 			znamka = "F";
 		}
 
-		pole[studentID] = id + "|" + jmeno + "|" + to_string(cviceni) + "|" + to_string(test) + "|" + to_string(zkouska) + "|" + znamka + "\n";
+		pole[pozice] = id + "|" + jmeno + "|" + to_string(cviceni) + "|" + to_string(test) + "|" + to_string(zkouska) + "|" + znamka + "\n";
 
 
 		switch (kurz) {

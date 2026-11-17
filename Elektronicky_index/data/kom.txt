@@ -1,4 +1,4 @@
 0|Novak|31|15|20|D
 1|Dobry|10|7|25|F
-2|Zog|0|0|0|F
 3|Fokt|20|0|0|F
+4|Jarol¡mek|12|0|0|F
