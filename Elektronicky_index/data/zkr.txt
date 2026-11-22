@@ -1,2 +1,6 @@
-0|Novak|5|5|0
-1|Dobry|0|6|0
+0|Novak|31|15|20|D
+1|Dobry|10|7|25|F
+3|Fokt|20|0|0|F
+4|Jarol!mek|12|2|0|F
+5|nevim|0|0|0|F
+6|hoiu|0|0|0|F
