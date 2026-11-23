@@ -5,4 +5,9 @@
 
 #include <iostream>
 
-// TODO: Zde odkažte na dodatečné hlavičky, které program vyžaduje.
+int PridejStudenta(int kurz);
+
+void SmazatStudenta(int kurz);
+
+void PridaniBodu(int kurz);
+
